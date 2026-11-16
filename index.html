@@ -3,95 +3,386 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lorenzo Filippi | Portfolio</title>
-<meta name="description" content="Lorenzo Filippi - Filmmaker, Camera Operator & Photographer">
+<meta name="theme-color" content="#0b0b0b">
+<title>Lorenzo Filippini | Portfolio</title>
+<meta name="description" content="Lorenzo Filippini - Filmmaker, Camera Operator & Photographer">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0b0b0b;--fg:#f5f5f5;--muted:#aaa}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:"DM Sans",sans-serif}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer}
-.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
-header{position:absolute;top:0;left:0;width:100%;z-index:10;padding:28px 0}
-nav{display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:800;font-size:19px;letter-spacing:-1px}
-.links{display:flex;gap:26px;font-size:13px}
-.hero{height:100svh;min-height:570px;position:relative;display:flex;align-items:center;overflow:hidden;background:#151515}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.07);transition:opacity 2s ease,transform 7s ease}
-.slide.active{opacity:1;transform:scale(1)}
-.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.2)),linear-gradient(0deg,rgba(0,0,0,.5),transparent 40%);backdrop-filter:blur(2px)}
-.hero-content{position:relative;z-index:2;width:100%}
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:4px;font-weight:700}
-h1,h2,h3{font-family:Manrope,sans-serif}
-h1{font-size:clamp(55px,10vw,125px);line-height:1;letter-spacing:-.075em;margin:22px 0;font-weight:800}
-.roles{font-size:clamp(13px,1.7vw,17px);color:#ddd;line-height:1.8}
-.hero-bottom{position:absolute;bottom:38px;left:0;width:100%;z-index:3}
-.hero-bottom .wrap{display:flex;justify-content:space-between;align-items:center}
-.scroll{font-size:11px;letter-spacing:3px;text-transform:uppercase}
-.dots{display:flex;gap:9px}
-.dot{width:27px;height:3px;border:0;background:#777;padding:0}
-.dot.active{background:white}
-section{padding:105px 0}
-.section-top{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:20px}
-.section-label{font-size:11px;color:var(--muted);letter-spacing:3px;text-transform:uppercase}
-h2{font-size:clamp(35px,5vw,58px);letter-spacing:-2px;margin:12px 0}
-.section-desc{max-width:340px;color:var(--muted);font-size:14px;line-height:1.7}
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
-.project{cursor:pointer}
-.project-image{position:relative;aspect-ratio:16/10;overflow:hidden;background:#222}
-.project-image img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease,filter .5s}
-.project:hover img{transform:scale(1.05);filter:brightness(.75)}
-.project-image::after{content:"VIEW PROJECT";position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.12);font-size:12px;letter-spacing:3px;opacity:0;transition:opacity .4s}
-.project:hover .project-image::after{opacity:1}
-.project-info{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:17px}
-.project-info h3{font-size:18px;margin:0;letter-spacing:-.5px}
-.project-info span{color:#999;font-size:12px}
-.about{border-top:1px solid #333}
-.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-image{width:100%;aspect-ratio:4/3;object-fit:cover;background:#222}
-.about-text{color:#bcbcbc;line-height:1.9;font-size:15px}
-.contact{border-top:1px solid #333;text-align:center}
-.contact h2{font-size:clamp(40px,7vw,85px)}
-.contact p{color:#aaa}
-.contact-button{display:inline-block;margin-top:20px;padding:15px 28px;border:1px solid white;font-size:13px;transition:.3s}
-.contact-button:hover{background:white;color:black}
-footer{padding:30px 0;border-top:1px solid #292929;color:#777;font-size:12px}
-.footer-inner{display:flex;justify-content:space-between;gap:20px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:100;display:none;overflow-y:auto;padding:70px 20px}
-.modal.open{display:block}
-.modal-inner{max-width:1150px;margin:auto}
-.close{position:fixed;right:25px;top:20px;border:1px solid #555;background:#181818;color:white;border-radius:50%;width:42px;height:42px;font-size:24px;z-index:101}
-.modal-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:45px;align-items:center}
-.modal-text h2{font-size:clamp(30px,4vw,48px);margin:12px 0 20px}
-.modal-text p{color:#bbb;line-height:1.8;font-size:15px}
-.modal-role{font-size:12px;color:#999;letter-spacing:2px;text-transform:uppercase}
-.more{background:none;color:white;border:0;border-bottom:1px solid #777;padding:8px 0;margin-top:8px;font-size:13px}
-.video-box{aspect-ratio:16/9;background:#202020}
-.video-box iframe{width:100%;height:100%;border:0}
-.video-placeholder{height:100%;display:grid;place-items:center;text-align:center;color:#aaa;padding:25px}
-@media(max-width:750px){
-header{padding:22px 0}
-.links{gap:15px;font-size:12px}
-.hero{min-height:550px}
-h1{font-size:clamp(52px,12vw,80px)}
-section{padding:75px 0}
-.section-top{display:block}
-.projects{grid-template-columns:1fr;gap:36px}
-.about-layout{grid-template-columns:1fr;gap:30px}
-.modal{padding:85px 20px 40px}
-.modal-grid{grid-template-columns:1fr;gap:25px}
-.video-box{grid-row:1}
-.modal-text{grid-row:2}
-.footer-inner{flex-direction:column}
+:root {
+  --bg: #0b0b0b;
+  --fg: #f5f5f5;
+  --muted: #aaa;
 }
-@media(prefers-reduced-motion:reduce){
-html{scroll-behavior:auto}
-.slide,.project-image img{transition:none}
+•⁠  ⁠{ box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "DM Sans", sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+.wrap {
+  width: min(1160px, calc(100% - 40px));
+  margin: auto;
+}
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 28px 0;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -1px;
+}
+.links {
+  display: flex;
+  gap: 26px;
+  font-size: 13px;
+}
+
+/* VIDEO DI APERTURA */
+
+.hero {
+  height: 100svh;
+  min-height: 570px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #151515;
+  isolation: isolate;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+}
+
+/* Sfumatura localizzata dietro il testo */
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.53) 27%,
+    rgba(0,0,0,.18) 49%,
+    transparent 75%
+  );
+}
+.hero-content {
+  position: relative;
+  width: 100%;
+}
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+h1, h2, h3 { font-family: Manrope, sans-serif; }
+h1 {
+  font-size: clamp(55px, 10vw, 125px);
+  line-height: 1;
+  letter-spacing: -.075em;
+  margin: 22px 0;
+  font-weight: 800;
+}
+.roles {
+  font-size: clamp(13px, 1.7vw, 17px);
+  color: #ddd;
+  line-height: 1.8;
+}
+.hero-bottom {
+  position: absolute;
+  bottom: 38px;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+.hero-bottom .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.scroll {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* PROGETTI */
+
+section { padding: 105px 0; }
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+.section-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: clamp(35px, 5vw, 58px);
+  letter-spacing: -2px;
+  margin: 12px 0;
+}
+.section-desc {
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+.project {
+  cursor: pointer;
+}
+.project-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+}
+.project-image {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: #222;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s ease, filter .5s;
+}
+.project:hover img {
+  transform: scale(1.05);
+  filter: brightness(.75);
+}
+.project-image::after {
+  content: "VIEW PROJECT";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.12);
+  font-size: 12px;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.project:hover .project-image::after { opacity: 1; }
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 17px;
+}
+.project-info h3 {
+  font-size: 18px;
+  margin: 0;
+  letter-spacing: -.5px;
+}
+.project-info span {
+  color: #999;
+  font-size: 12px;
+}
+
+/* CHI SONO */
+
+.about { border-top: 1px solid #333; }
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.about-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  background: #222;
+}
+.about-text {
+  color: #bcbcbc;
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+/* CONTATTI */
+
+.contact {
+  border-top: 1px solid #333;
+  text-align: center;
+}
+.contact h2 { font-size: clamp(40px, 7vw, 85px); }
+.contact p { color: #aaa; }
+.contact-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 28px;
+  border: 1px solid white;
+  font-size: 13px;
+  transition: .3s;
+}
+.contact-button:hover {
+  background: white;
+  color: black;
+}
+footer {
+  padding: 30px 0;
+  border-top: 1px solid #292929;
+  color: #777;
+  font-size: 12px;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* DETTAGLIO PROGETTO */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.94);
+  z-index: 100;
+  display: none;
+  overflow-y: auto;
+  padding: 70px 20px;
+}
+.modal.open { display: block; }
+.modal-inner {
+  max-width: 1150px;
+  margin: auto;
+}
+.close {
+  position: fixed;
+  right: 25px;
+  top: 20px;
+  border: 1px solid #555;
+  background: #181818;
+  color: white;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 24px;
+  z-index: 101;
+}
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 45px;
+  align-items: center;
+}
+.modal-text h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  margin: 12px 0 20px;
+}
+.modal-text p {
+  color: #bbb;
+  line-height: 1.8;
+  font-size: 15px;
+}
+.modal-role {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.more {
+  background: none;
+  color: white;
+  border: 0;
+  border-bottom: 1px solid #777;
+  padding: 8px 0;
+  margin-top: 8px;
+  font-size: 13px;
+}
+.video-box {
+  aspect-ratio: 16/9;
+  background: #202020;
+}
+.video-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-placeholder {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #aaa;
+  padding: 25px;
+}
+
+/* VERSIONE SMARTPHONE */
+
+@media(max-width:750px) {
+  header { padding: 22px 0; }
+  .links { gap: 15px; font-size: 12px; }
+  .hero { min-height: 550px; }
+  h1 { font-size: clamp(52px, 12vw, 80px); }
+  .hero-shade {
+    background: linear-gradient(
+      90deg,
+      rgba(0,0,0,.72),
+      rgba(0,0,0,.3) 65%,
+      rgba(0,0,0,.08)
+    );
+  }
+  section { padding: 75px 0; }
+  .section-top { display: block; }
+  .projects { grid-template-columns: 1fr; gap: 36px; }
+  .about-layout { grid-template-columns: 1fr; gap: 30px; }
+  .modal { padding: 85px 20px 40px; }
+  .modal-grid { grid-template-columns: 1fr; gap: 25px; }
+  .video-box { grid-row: 1; }
+  .modal-text { grid-row: 2; }
+  .footer-inner { flex-direction: column; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto; }
+  .project-image img { transition: none; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -106,32 +397,40 @@ html{scroll-behavior:auto}
 </header>
 
 <main>
+
+<!-- VIDEO DI APERTURA -->
 <div class="hero">
-<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=2000&q=85')"></div>
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=2000&q=85')"></div>
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=85')"></div>
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2000&q=85')"></div>
-<div class="shade"></div>
+<video
+  class="hero-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  aria-hidden="true">
+  <source src="intro%20portfolio.mp4" type="video/mp4">
+</video>
+
+<div class="hero-shade"></div>
+
 <div class="hero-content">
 <div class="wrap">
 <div class="eyebrow">Independent Visual Portfolio</div>
-<h1>LORENZO<br>FILIPPI.</h1>
-<div class="roles">Filmmaker &nbsp;·&nbsp; Camera Operator &nbsp;·&nbsp; Photographer</div>
-</div>
-</div>
-<div class="hero-bottom">
-<div class="wrap">
-<span class="scroll">Scroll to explore ↓</span>
-<div class="dots">
-<button class="dot active" aria-label="Immagine 1" onclick="showSlide(0)"></button>
-<button class="dot" aria-label="Immagine 2" onclick="showSlide(1)"></button>
-<button class="dot" aria-label="Immagine 3" onclick="showSlide(2)"></button>
-<button class="dot" aria-label="Immagine 4" onclick="showSlide(3)"></button>
-</div>
+<h1>LORENZO<br>FILIPPINI.</h1>
+<div class="roles">
+Filmmaker &nbsp;·&nbsp; Camera Operator &nbsp;·&nbsp; Photographer
 </div>
 </div>
 </div>
 
+<div class="hero-bottom">
+<div class="wrap">
+<span class="scroll">Scroll to explore ↓</span>
+</div>
+</div>
+</div>
+
+<!-- PROGETTI -->
 <section id="work">
 <div class="wrap">
 <div class="section-top">
@@ -139,20 +438,26 @@ html{scroll-behavior:auto}
 <div class="section-label">01 / Selected Work</div>
 <h2>Selected Projects.</h2>
 </div>
-<p class="section-desc">Una selezione di progetti, immagini e storie raccontate attraverso la videocamera.</p>
+<p class="section-desc">
+Una selezione di progetti, immagini e storie raccontate attraverso la videocamera.
+</p>
 </div>
 <div class="projects" id="projects"></div>
 </div>
 </section>
 
+<!-- CHI SONO -->
 <section class="about" id="about">
 <div class="wrap about-layout">
-<img class="about-image" src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=85" alt="Fotografia provvisoria">
+<img
+  class="about-image"
+  src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=85"
+  alt="Fotografia provvisoria">
 <div>
 <div class="section-label">02 / About Me</div>
 <h2>Behind the lens.</h2>
 <div class="about-text">
-<p>Sono Lorenzo Filippi, filmmaker, camera operator e fotografo.</p>
+<p>Sono Lorenzo Filippini, filmmaker, camera operator e fotografo.</p>
 <p>Mi occupo di produzione visiva, lavorando con immagini in movimento e fotografia per raccontare progetti, persone e idee.</p>
 <p>Questo spazio raccoglie una selezione dei miei lavori e delle esperienze che hanno contribuito a costruire il mio percorso.</p>
 <p>Testo provvisorio: qui inseriremo una presentazione più personale.</p>
@@ -161,23 +466,28 @@ html{scroll-behavior:auto}
 </div>
 </section>
 
+<!-- CONTATTI -->
 <section class="contact" id="contact">
 <div class="wrap">
 <div class="section-label">03 / Get in Touch</div>
 <h2>Let's create<br>something.</h2>
 <p>Hai un progetto in mente? Parliamone.</p>
-<a class="contact-button" href="mailto:inserisci-la-tua-email@example.com">CONTACT ME ↗️</a>
+<a class="contact-button" href="mailto:inserisci-la-tua-email@example.com">
+CONTACT ME ↗️
+</a>
 </div>
 </section>
+
 </main>
 
 <footer>
 <div class="wrap footer-inner">
-<span>© <span id="year"></span> Lorenzo Filippi</span>
+<span>©️ <span id="year"></span> Lorenzo Filippini</span>
 <span>Filmmaker · Camera Operator · Photographer</span>
 </div>
 </footer>
 
+<!-- FINESTRA DETTAGLIO PROGETTO -->
 <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Dettagli progetto">
 <button class="close" onclick="closeProject()" aria-label="Chiudi">×</button>
 <div class="modal-inner">
@@ -197,14 +507,8 @@ html{scroll-behavior:auto}
 </div>
 
 <script>
-/*
-  CONTENUTI PROVVISORI
-  Sostituiremo immagini, descrizioni e video
-  quando avrai selezionato i tuoi lavori.
 
-  Per aggiungere un video YouTube:
-  inserisci soltanto il suo ID nel campo videoId.
-*/
+/* PROGETTI PROVVISORI */
 
 const projects = [
 {
@@ -241,126 +545,117 @@ videoId:""
 }
 ];
 
-/* CAROSELLO AUTOMATICO */
+/* CREA LE COPERTINE */
 
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
-let currentSlide = 0;
+const container = document.getElementById("projects");
 
-function showSlide(index){
-currentSlide = index;
-slides.forEach((slide,i)=>{
-slide.classList.toggle("active",i===index);
-});
-dots.forEach((dot,i)=>{
-dot.classList.toggle("active",i===index);
-});
-}
+projects.forEach((project,index) => {
+  const card = document.createElement("article");
+  card.className = "project";
 
-setInterval(()=>{
-showSlide((currentSlide+1)%slides.length);
-},5500);
+  const button = document.createElement("button");
+  button.className = "project-button";
+  button.setAttribute("aria-label","Apri progetto: "+project.title);
 
-/* GRIGLIA PROGETTI */
+  const imageBox = document.createElement("div");
+  imageBox.className = "project-image";
 
-const projectContainer = document.getElementById("projects");
+  const image = document.createElement("img");
+  image.src = project.image;
+  image.alt = project.title;
+  image.loading = "lazy";
+  imageBox.appendChild(image);
 
-projects.forEach((project,index)=>{
-const card = document.createElement("article");
-card.className = "project";
+  const info = document.createElement("div");
+  info.className = "project-info";
 
-const button = document.createElement("button");
-button.type = "button";
-button.style.cssText = "display:block;width:100%;padding:0;border:0;background:none;color:inherit;text-align:left";
-button.setAttribute("aria-label","Apri progetto: "+project.title);
+  const title = document.createElement("h3");
+  title.textContent = project.title;
 
-const picture = document.createElement("div");
-picture.className = "project-image";
-const img = document.createElement("img");
-img.src = project.image;
-img.alt = project.title;
-img.loading = "lazy";
-picture.appendChild(img);
+  const role = document.createElement("span");
+  role.textContent = project.role;
 
-const info = document.createElement("div");
-info.className = "project-info";
-const heading = document.createElement("h3");
-heading.textContent = project.title;
-const role = document.createElement("span");
-role.textContent = project.role;
-info.append(heading,role);
+  info.append(title,role);
+  button.append(imageBox,info);
+  button.addEventListener("click",()=>openProject(index));
 
-button.append(picture,info);
-button.addEventListener("click",()=>openProject(index));
-card.appendChild(button);
-projectContainer.appendChild(card);
+  card.appendChild(button);
+  container.appendChild(card);
 });
 
-/* FINESTRA DETTAGLIO PROGETTO */
+/* APERTURA PROGETTI */
 
 const modal = document.getElementById("projectModal");
 let previousFocus = null;
 
-function openProject(index){
-const project = projects[index];
-previousFocus = document.activeElement;
+function openProject(index) {
+  const project = projects[index];
+  previousFocus = document.activeElement;
 
-document.getElementById("modalTitle").textContent = project.title;
-document.getElementById("modalRole").textContent = project.role;
-document.getElementById("modalDescription").textContent = project.description;
-document.getElementById("modalLongDescription").textContent = project.extra;
+  document.getElementById("modalTitle").textContent = project.title;
+  document.getElementById("modalRole").textContent = project.role;
+  document.getElementById("modalDescription").textContent = project.description;
+  document.getElementById("modalLongDescription").textContent = project.extra;
 
-document.getElementById("modalExtra").hidden = true;
-document.getElementById("readMore").textContent = "Leggi di più +";
+  document.getElementById("modalExtra").hidden = true;
+  document.getElementById("readMore").textContent = "Leggi di più +";
 
-const video = document.getElementById("modalVideo");
-video.replaceChildren();
+  const video = document.getElementById("modalVideo");
+  video.replaceChildren();
 
-if(project.videoId){
-const iframe = document.createElement("iframe");
-iframe.src = "https://www.youtube-nocookie.com/embed/"+encodeURIComponent(project.videoId)+"?autoplay=1&rel=0";
-iframe.title = "Video: "+project.title;
-iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-iframe.allowFullscreen = true;
-video.appendChild(iframe);
-}else{
-const placeholder = document.createElement("div");
-placeholder.className = "video-placeholder";
-placeholder.textContent = "Qui apparirà il video del progetto. Per ora è un contenuto provvisorio.";
-video.appendChild(placeholder);
+  if(project.videoId) {
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" +
+      encodeURIComponent(project.videoId) + "?autoplay=1&rel=0";
+    iframe.title = project.title;
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+    iframe.allowFullscreen = true;
+    video.appendChild(iframe);
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "video-placeholder";
+    placeholder.textContent = "Qui apparirà il video del progetto.";
+    video.appendChild(placeholder);
+  }
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  modal.scrollTop = 0;
+  modal.querySelector(".close").focus();
 }
 
-modal.classList.add("open");
-document.body.style.overflow = "hidden";
-modal.scrollTop = 0;
-modal.querySelector(".close").focus();
+function closeProject() {
+  modal.classList.remove("open");
+  document.getElementById("modalVideo").replaceChildren();
+  document.body.style.overflow = "";
+  if(previousFocus) previousFocus.focus();
 }
 
-function closeProject(){
-modal.classList.remove("open");
-document.getElementById("modalVideo").replaceChildren();
-document.body.style.overflow = "";
-if(previousFocus) previousFocus.focus();
+function toggleMore() {
+  const extra = document.getElementById("modalExtra");
+  extra.hidden = !extra.hidden;
+  document.getElementById("readMore").textContent =
+    extra.hidden ? "Leggi di più +" : "Mostra meno −";
 }
 
-function toggleMore(){
-const extra = document.getElementById("modalExtra");
-extra.hidden = !extra.hidden;
-document.getElementById("readMore").textContent = extra.hidden ? "Leggi di più +" : "Mostra meno −";
-}
-
-modal.addEventListener("click",event=>{
-if(event.target===modal) closeProject();
+modal.addEventListener("click", event => {
+  if(event.target === modal) closeProject();
 });
 
-document.addEventListener("keydown",event=>{
-if(event.key==="Escape" && modal.classList.contains("open")){
-closeProject();
-}
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape" && modal.classList.contains("open")) {
+    closeProject();
+  }
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 
+/* AVVIO VIDEO */
+const heroVideo = document.querySelector(".hero-video");
+heroVideo.play().catch(() => {
+  // Alcuni browser possono bloccare l'avvio automatico.
+});
+
+</script>
 </body>
 </html>
