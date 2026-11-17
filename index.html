@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b0b0b">
+
 <title>Lorenzo Filippini | Portfolio</title>
-<meta name="description" content="Lorenzo Filippini - Filmmaker, Camera Operator & Photographer">
+<meta name="description" content="Lorenzo Filippini — Filmmaker, Camera Operator & Photographer">
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -14,20 +16,49 @@
   --fg: #f5f5f5;
   --muted: #aaa;
 }
-•⁠  ⁠{ box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+•⁠  ⁠{
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: "DM Sans", sans-serif;
 }
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; }
+
+body.modal-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+
 .wrap {
   width: min(1160px, calc(100% - 40px));
   margin: auto;
 }
+
+/* HEADER */
+
 header {
   position: absolute;
   top: 0;
@@ -36,20 +67,32 @@ header {
   z-index: 10;
   padding: 28px 0;
 }
+
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .logo {
+  font-family: "Manrope", sans-serif;
   font-weight: 800;
   font-size: 19px;
   letter-spacing: -1px;
 }
+
 .links {
   display: flex;
   gap: 26px;
   font-size: 13px;
+}
+
+.links a {
+  transition: opacity .3s ease;
+}
+
+.links a:hover {
+  opacity: .55;
 }
 
 /* VIDEO DI APERTURA */
@@ -64,6 +107,7 @@ nav {
   background: #151515;
   isolation: isolate;
 }
+
 .hero-video {
   position: absolute;
   inset: 0;
@@ -74,7 +118,6 @@ nav {
   z-index: -2;
 }
 
-/* Sfumatura localizzata dietro il testo */
 .hero-shade {
   position: absolute;
   inset: 0;
@@ -88,29 +131,93 @@ nav {
     transparent 75%
   );
 }
+
 .hero-content {
   position: relative;
   width: 100%;
 }
+
+/* LINEA ANIMATA */
+
+.hero-layout {
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+}
+
+.hero-line {
+  position: relative;
+  flex: 0 0 1px;
+  width: 1px;
+  background: rgba(255,255,255,.15);
+  overflow: hidden;
+}
+
+.hero-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.85);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: drawLine 1.8s cubic-bezier(.22,1,.36,1) .25s forwards;
+}
+
+.hero-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  top: 0;
+  background: #fff;
+  opacity: .65;
+  transform: translateY(var(--line-shift, -120%));
+  transition: transform .15s linear;
+}
+
+@keyframes drawLine {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.hero-copy {
+  min-width: 0;
+  text-align: left;
+}
+
 .eyebrow {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 4px;
   font-weight: 700;
+  text-align: left;
 }
-h1, h2, h3 { font-family: Manrope, sans-serif; }
+
+h1, h2, h3 {
+  font-family: "Manrope", sans-serif;
+}
+
 h1 {
   font-size: clamp(55px, 10vw, 125px);
   line-height: 1;
   letter-spacing: -.075em;
   margin: 22px 0;
   font-weight: 800;
+  text-align: left;
 }
+
 .roles {
   font-size: clamp(13px, 1.7vw, 17px);
   color: #ddd;
   line-height: 1.8;
+  text-align: left;
 }
+
 .hero-bottom {
   position: absolute;
   bottom: 38px;
@@ -118,20 +225,25 @@ h1 {
   width: 100%;
   z-index: 3;
 }
+
 .hero-bottom .wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .scroll {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
-/* PROGETTI */
+/* SEZIONI */
 
-section { padding: 105px 0; }
+section {
+  padding: 105px 0;
+}
+
 .section-top {
   display: flex;
   justify-content: space-between;
@@ -139,31 +251,39 @@ section { padding: 105px 0; }
   margin-bottom: 40px;
   gap: 20px;
 }
+
 .section-label {
   font-size: 11px;
   color: var(--muted);
   letter-spacing: 3px;
   text-transform: uppercase;
 }
+
 h2 {
   font-size: clamp(35px, 5vw, 58px);
   letter-spacing: -2px;
   margin: 12px 0;
 }
+
 .section-desc {
   max-width: 340px;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.7;
 }
+
+/* PROGETTI */
+
 .projects {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
+  gap: 38px 32px;
 }
+
 .project {
-  cursor: pointer;
+  min-width: 0;
 }
+
 .project-button {
   display: block;
   width: 100%;
@@ -173,36 +293,110 @@ h2 {
   color: inherit;
   text-align: left;
 }
+
 .project-image {
   position: relative;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: #222;
+  isolation: isolate;
 }
+
 .project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform .7s ease, filter .5s;
+  transition:
+    transform .85s cubic-bezier(.22,1,.36,1),
+    filter .7s ease;
 }
-.project:hover img {
-  transform: scale(1.05);
-  filter: brightness(.75);
-}
-.project-image::after {
-  content: "VIEW PROJECT";
+
+.project-image::before {
+  content: "";
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgba(0,0,0,.12);
-  font-size: 12px;
-  letter-spacing: 3px;
-  opacity: 0;
-  transition: opacity .4s;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.05) 35%,
+    rgba(0,0,0,.75) 100%
+  );
+  transition: background .5s ease;
 }
-.project:hover .project-image::after { opacity: 1; }
+
+.project-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition:
+    backdrop-filter .6s ease,
+    -webkit-backdrop-filter .6s ease;
+  pointer-events: none;
+}
+
+.project:hover .project-image img,
+.project-button:focus-visible .project-image img {
+  transform: scale(1.065);
+  filter: brightness(.8);
+}
+
+.project:hover .project-image::after,
+.project-button:focus-visible .project-image::after {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.project-overlay {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.project-number {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 10px;
+}
+
+.project-overlay h3 {
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0;
+  color: #fff;
+}
+
+.project-view {
+  display: inline-block;
+  margin-top: 13px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.8);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
+}
+
+.project:hover .project-view,
+.project-button:focus-visible .project-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .project-info {
   display: flex;
   justify-content: space-between;
@@ -210,31 +404,55 @@ h2 {
   gap: 12px;
   padding-top: 17px;
 }
+
 .project-info h3 {
-  font-size: 18px;
+  font-size: 15px;
   margin: 0;
-  letter-spacing: -.5px;
+  letter-spacing: -.4px;
+  font-weight: 600;
 }
+
 .project-info span {
   color: #999;
   font-size: 12px;
+  text-align: right;
 }
 
-/* CHI SONO */
+/* APPARIZIONE DURANTE SCROLL */
 
-.about { border-top: 1px solid #333; }
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity .9s cubic-bezier(.22,1,.36,1),
+    transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ABOUT */
+
+.about {
+  border-top: 1px solid #333;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
 }
+
 .about-image {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   background: #222;
 }
+
 .about-text {
   color: #bcbcbc;
   line-height: 1.9;
@@ -247,26 +465,62 @@ h2 {
   border-top: 1px solid #333;
   text-align: center;
 }
-.contact h2 { font-size: clamp(40px, 7vw, 85px); }
-.contact p { color: #aaa; }
+
+.contact h2 {
+  font-size: clamp(40px, 7vw, 85px);
+}
+
+.contact p {
+  color: #aaa;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  margin-top: 32px;
+}
+
+.contact-details a {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #f5f5f5;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  padding-bottom: 5px;
+  transition:
+    color .3s ease,
+    border-color .3s ease;
+}
+
+.contact-details a:hover {
+  color: #aaa;
+  border-color: #aaa;
+}
+
 .contact-button {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 35px;
   padding: 15px 28px;
   border: 1px solid white;
   font-size: 13px;
+  letter-spacing: 1px;
   transition: .3s;
 }
+
 .contact-button:hover {
   background: white;
   color: black;
 }
+
+/* FOOTER */
+
 footer {
   padding: 30px 0;
   border-top: 1px solid #292929;
   color: #777;
   font-size: 12px;
 }
+
 .footer-inner {
   display: flex;
   justify-content: space-between;
@@ -278,17 +532,22 @@ footer {
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.94);
+  background: rgba(0,0,0,.96);
   z-index: 100;
   display: none;
   overflow-y: auto;
-  padding: 70px 20px;
+  padding: 85px 20px 60px;
 }
-.modal.open { display: block; }
+
+.modal.open {
+  display: block;
+}
+
 .modal-inner {
   max-width: 1150px;
   margin: auto;
 }
+
 .close {
   position: fixed;
   right: 25px;
@@ -302,27 +561,40 @@ footer {
   font-size: 24px;
   z-index: 101;
 }
+
+.close:hover {
+  background: #333;
+}
+
 .modal-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 45px;
   align-items: center;
 }
+
 .modal-text h2 {
   font-size: clamp(30px, 4vw, 48px);
   margin: 12px 0 20px;
 }
+
 .modal-text p {
   color: #bbb;
   line-height: 1.8;
   font-size: 15px;
 }
+
 .modal-role {
   font-size: 12px;
   color: #999;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+.modal-extra[hidden] {
+  display: none;
+}
+
 .more {
   background: none;
   color: white;
@@ -332,31 +604,51 @@ footer {
   margin-top: 8px;
   font-size: 13px;
 }
+
 .video-box {
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
   background: #202020;
 }
+
 .video-box iframe {
   width: 100%;
   height: 100%;
   border: 0;
 }
-.video-placeholder {
-  height: 100%;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: #aaa;
-  padding: 25px;
-}
 
-/* VERSIONE SMARTPHONE */
+/* SMARTPHONE */
 
-@media(max-width:750px) {
-  header { padding: 22px 0; }
-  .links { gap: 15px; font-size: 12px; }
-  .hero { min-height: 550px; }
-  h1 { font-size: clamp(52px, 12vw, 80px); }
+@media (max-width: 750px) {
+  header {
+    padding: 22px 0;
+  }
+
+  .links {
+    gap: 15px;
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 550px;
+  }
+
+  .hero-layout {
+    gap: 17px;
+  }
+
+  h1 {
+    font-size: clamp(43px, 11vw, 80px);
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .roles {
+    font-size: 12px;
+  }
+
   .hero-shade {
     background: linear-gradient(
       90deg,
@@ -365,206 +657,497 @@ footer {
       rgba(0,0,0,.08)
     );
   }
-  section { padding: 75px 0; }
-  .section-top { display: block; }
-  .projects { grid-template-columns: 1fr; gap: 36px; }
-  .about-layout { grid-template-columns: 1fr; gap: 30px; }
-  .modal { padding: 85px 20px 40px; }
-  .modal-grid { grid-template-columns: 1fr; gap: 25px; }
-  .video-box { grid-row: 1; }
-  .modal-text { grid-row: 2; }
-  .footer-inner { flex-direction: column; }
+
+  section {
+    padding: 75px 0;
+  }
+
+  .section-top {
+    display: block;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .project-overlay {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .project-overlay h3 {
+    font-size: 28px;
+  }
+
+  .project-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .modal {
+    padding: 85px 20px 40px;
+  }
+
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .video-box {
+    grid-row: 1;
+  }
+
+  .modal-text {
+    grid-row: 2;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+  }
 }
 
-@media(prefers-reduced-motion:reduce) {
-  html { scroll-behavior: auto; }
-  .project-image img { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-line::before {
+    animation: none;
+    transform: scaleY(1);
+  }
+
+  .hero-line::after {
+    display: none;
+  }
+
+  .project-image img,
+  .project-image::after,
+  .project-view,
+  .reveal {
+    transition: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-<nav class="wrap">
-<a href="#" class="logo">LF.</a>
-<div class="links">
-<a href="#work">Projects</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</div>
-</nav>
+  <nav class="wrap">
+    <a href="#" class="logo">LF.</a>
+
+    <div class="links">
+      <a href="#work">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 </header>
 
 <main>
 
 <!-- VIDEO DI APERTURA -->
+
 <div class="hero">
-<video
-  class="hero-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  aria-hidden="true">
-  <source src="intro.mp4" type="video/mp4">
-</video>
 
-<div class="hero-shade"></div>
+  <video
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true">
 
-<div class="hero-content">
-<div class="wrap">
-<div class="eyebrow">Independent Visual Portfolio</div>
-<h1>LORENZO<br>FILIPPINI</h1>
-<div class="roles">
-Filmmaker &nbsp;·&nbsp; Camera Operator &nbsp;·&nbsp; Photographer
-</div>
-</div>
-</div>
+    <source src="intro.mp4" type="video/mp4">
 
-<div class="hero-bottom">
-<div class="wrap">
-<span class="scroll">Scroll to explore ↓</span>
-</div>
-</div>
+  </video>
+
+  <div class="hero-shade"></div>
+
+  <div class="hero-content">
+    <div class="wrap">
+
+      <div class="hero-layout">
+
+        <div class="hero-line" aria-hidden="true"></div>
+
+        <div class="hero-copy">
+
+          <div class="eyebrow">
+            Independent Visual Portfolio
+          </div>
+
+          <h1>
+            LORENZO<br>
+            FILIPPINI
+          </h1>
+
+          <div class="roles">
+            Filmmaker &nbsp;·&nbsp; Camera Operator
+            &nbsp;·&nbsp; Photographer
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="wrap">
+      <span class="scroll">
+        Scroll to explore ↓
+      </span>
+    </div>
+  </div>
+
 </div>
 
 <!-- PROGETTI -->
+
 <section id="work">
-<div class="wrap">
-<div class="section-top">
-<div>
-<div class="section-label">01 / Selected Work</div>
-<h2>Selected Projects.</h2>
-</div>
-<p class="section-desc">
-Una selezione di progetti, immagini e storie raccontate attraverso la videocamera.
-</p>
-</div>
-<div class="projects" id="projects"></div>
-</div>
+
+  <div class="wrap">
+
+    <div class="section-top">
+
+      <div>
+        <div class="section-label">
+          01 / Selected Work
+        </div>
+
+        <h2>Selected Projects.</h2>
+      </div>
+
+      <p class="section-desc">
+        Una selezione di progetti, immagini e storie
+        raccontate attraverso la videocamera.
+      </p>
+
+    </div>
+
+    <div class="projects" id="projects"></div>
+
+  </div>
+
 </section>
 
-<!-- CHI SONO -->
+<!-- ABOUT -->
+
 <section class="about" id="about">
-<div class="wrap about-layout">
-<img
-  class="about-image"
-  src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=85"
-  alt="Fotografia provvisoria">
-<div>
-<div class="section-label">02 / About Me</div>
-<h2>Behind the lens.</h2>
-<div class="about-text">
-<p>Sono Lorenzo Filippini, filmmaker, camera operator e fotografo.</p>
-<p>Mi occupo di produzione visiva, lavorando con immagini in movimento e fotografia per raccontare progetti, persone e idee.</p>
-<p>Questo spazio raccoglie una selezione dei miei lavori e delle esperienze che hanno contribuito a costruire il mio percorso.</p>
-<p>Testo provvisorio: qui inseriremo una presentazione più personale.</p>
-</div>
-</div>
-</div>
+
+  <div class="wrap about-layout">
+
+    <img
+      class="about-image"
+      src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=85"
+      alt="Fotografia provvisoria">
+
+    <div>
+
+      <div class="section-label">
+        02 / About Me
+      </div>
+
+      <h2>Behind the lens.</h2>
+
+      <div class="about-text">
+
+        <p>
+          Sono Lorenzo Filippini, filmmaker,
+          camera operator e fotografo.
+        </p>
+
+        <p>
+          Mi occupo di produzione visiva, lavorando
+          con immagini in movimento e fotografia
+          per raccontare progetti, persone e idee.
+        </p>
+
+        <p>
+          Questo spazio raccoglie una selezione
+          dei miei lavori e delle esperienze che
+          hanno contribuito a costruire il mio percorso.
+        </p>
+
+        <p>
+          Testo provvisorio: qui inseriremo
+          una presentazione più personale.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
 <!-- CONTATTI -->
+
 <section class="contact" id="contact">
-<div class="wrap">
-<div class="section-label">03 / Get in Touch</div>
-<h2>Let's create<br>something.</h2>
-<p>Hai un progetto in mente? Parliamone.</p>
-<a class="contact-button" href="mailto:inserisci-la-tua-email@example.com">
-CONTACT ME ↗️
-</a>
-</div>
+
+  <div class="wrap">
+
+    <div class="section-label">
+      03 / Get in Touch
+    </div>
+
+    <h2>
+      Let's create<br>
+      something.
+    </h2>
+
+    <p>
+      Hai un progetto in mente? Parliamone.
+    </p>
+
+    <div class="contact-details">
+
+      <a href="mailto:lorenzo.filippini.video@gmail.com">
+        lorenzo.filippini.video@gmail.com
+      </a>
+
+      <a href="tel:+393423261198">
+        +39 342 326 1198
+      </a>
+
+    </div>
+
+    <a
+      class="contact-button"
+      href="mailto:lorenzo.filippini.video@gmail.com">
+      CONTACT ME ↗️
+    </a>
+
+  </div>
+
 </section>
 
 </main>
 
+<!-- FOOTER -->
+
 <footer>
-<div class="wrap footer-inner">
-<span>©️ <span id="year"></span> Lorenzo Filippini</span>
-<span>Filmmaker · Camera Operator · Photographer</span>
-</div>
+
+  <div class="wrap footer-inner">
+
+    <span>
+      ©️ <span id="year"></span> Lorenzo Filippini
+    </span>
+
+    <span>
+      Filmmaker · Camera Operator · Photographer
+    </span>
+
+  </div>
+
 </footer>
 
 <!-- FINESTRA DETTAGLIO PROGETTO -->
-<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Dettagli progetto">
-<button class="close" onclick="closeProject()" aria-label="Chiudi">×</button>
-<div class="modal-inner">
-<div class="modal-grid">
-<div class="modal-text">
-<div class="modal-role" id="modalRole"></div>
-<h2 id="modalTitle"></h2>
-<p id="modalDescription"></p>
-<div id="modalExtra" hidden>
-<p id="modalLongDescription"></p>
-</div>
-<button class="more" id="readMore" onclick="toggleMore()">Leggi di più +</button>
-</div>
-<div class="video-box" id="modalVideo"></div>
-</div>
-</div>
+
+<div
+  class="modal"
+  id="projectModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Dettagli progetto"
+  aria-hidden="true">
+
+  <button
+    class="close"
+    id="closeModal"
+    aria-label="Chiudi">
+    ×
+  </button>
+
+  <div class="modal-inner">
+
+    <div class="modal-grid">
+
+      <div class="modal-text">
+
+        <div
+          class="modal-role"
+          id="modalRole">
+        </div>
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalDescription"></p>
+
+        <div
+          class="modal-extra"
+          id="modalExtra"
+          hidden>
+
+          <p id="modalLongDescription"></p>
+
+        </div>
+
+        <button
+          class="more"
+          id="readMore">
+          Leggi di più +
+        </button>
+
+      </div>
+
+      <div
+        class="video-box"
+        id="modalVideo">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <script>
 
-/* PROGETTI PROVVISORI */
+/* ========================================
+   ELENCO PROGETTI
+
+   Per aggiungere un nuovo progetto,
+   copia un oggetto dell'array e modifica:
+   title, role, image, description,
+   extra e videoId.
+======================================== */
 
 const projects = [
-{
-title:"Project 01 — Visual Story",
-role:"Filmmaking / Camera",
-image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=85",
-description:"Un progetto visivo dedicato alla narrazione attraverso immagini, movimento e composizione cinematografica.",
-extra:"Qui racconteremo il contesto della produzione, il tuo ruolo specifico, le attrezzature utilizzate e il risultato finale.",
-videoId:""
-},
-{
-title:"Project 02 — Behind the Scenes",
-role:"Camera Operator",
-image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=85",
-description:"Un'esperienza di produzione sul set, tra riprese, collaborazione e ricerca della giusta inquadratura.",
-extra:"Qui potremo descrivere il tipo di produzione, le responsabilità e le attività svolte sul set.",
-videoId:""
-},
-{
-title:"Project 03 — Motion & Light",
-role:"Filmmaking",
-image:"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=1200&q=85",
-description:"Un lavoro incentrato sul linguaggio visivo, sul ritmo delle immagini e sull'utilizzo della luce.",
-extra:"Aggiungeremo qui la storia del progetto e il tuo contributo alla sua realizzazione.",
-videoId:""
-},
-{
-title:"Project 04 — Frames",
-role:"Photography",
-image:"https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=85",
-description:"Una selezione fotografica che esplora composizione, atmosfera e identità visiva.",
-extra:"Questa sezione potrà contenere fotografie, informazioni sullo shooting e una descrizione del progetto.",
-videoId:""
-}
+
+  {
+    title: "MASTERPIECE",
+
+    role: "Short Film / Camera Operator",
+
+    image: "copertina masterpiece.jpeg",
+
+    description:
+      "Un cortometraggio realizzato durante il corso di APM – Alto Perfezionamento Musicale. La storia di un giovane pianista intrappolato in un loop temporale, in cui ogni giorno tenta di prevalere sugli altri musicisti. Una competizione apparentemente esterna che si rivela, in realtà, un conflitto interiore.",
+
+    extra:
+      "Un racconto sulla pressione del confronto, sull'insicurezza e sulla ricerca di un'identità artistica, in una dimensione sospesa tra realtà e percezione.\n\nRiprese: Lorenzo Filippini, Alessandro Castagna.",
+
+    videoId: "lRzLAg8lKdo"
+  },
+
+  {
+    title: "CASEIFICIO LA BUFALINA",
+
+    role: "Commercial / Filmmaking",
+
+    image: "copertina bufalina.jpeg",
+
+    description:
+      "Un viaggio visivo nella tradizione casearia campana, tra gesti artigianali, materie prime e saperi tramandati nel tempo. Realizzato nel 2025 per Caseificio La Bufalina, realtà produttiva italiana in Bulgaria, lo spot racconta le diverse fasi della lavorazione casearia, valorizzando la manualità, la cura dei dettagli e l'autenticità di una tradizione che supera i confini geografici.",
+
+    extra:
+      "Un racconto per immagini in cui la materia e il gesto diventano protagonisti, restituendo il legame tra artigianalità, cultura e territorio.\n\nRegia, riprese e montaggio: Lorenzo Filippini.",
+
+    videoId: "mPwFs8vP14s"
+  },
+
+  {
+    title: "ERO ERO — ROERO",
+
+    role: "Commercial / Camera & Editing",
+
+    image: "copertina Roero.jpeg",
+
+    description:
+      "Una storia di famiglia, un territorio e una tradizione che incontra il desiderio di reinventarsi. Tra i paesaggi vitivinicoli del Roero, questo progetto audiovisivo racconta l'identità della Cantina Ero Ero, esplorando il legame tra le proprie origini e una nuova visione del vino.",
+
+    extra:
+      "Al centro del racconto, Drink Something Else: un progetto che nasce dalla tradizione per reinterpretarla attraverso un linguaggio contemporaneo, un'identità visiva audace e una comunicazione fuori dagli schemi. Un racconto che mette in dialogo passato e presente, tradizione e sperimentazione.\n\nProduzione: in collaborazione con APM – Alto Perfezionamento Musicale.\nRiprese: team di produzione APM, con la partecipazione di Lorenzo Filippini.\nMontaggio: Lorenzo Filippini e Giovanni Russo.",
+
+    videoId: "pXJT1ezfkMI"
+  },
+
+  {
+    title: "KAOSAJ TAVOLOJ",
+
+    role: "Fashion Film / Camera & Editing",
+
+    image: "copertina alessia.jpeg",
+
+    description:
+      "Un progetto visivo e performativo ideato da Alessia Lalinga per la sua tesi in Textile & Fashion Design presso IAAD. KAOSAJ TAVOLOJ, 'Strati Caotici', esplora il caos come condizione espressiva, attraverso stratificazioni, frammenti, corpi, abiti destrutturati e performance.",
+
+    extra:
+      "Il progetto si sviluppa intorno a quattro dimensioni: ciò che il caos nasconde, la frammentazione dell'identità, la percezione del tempo e il disorientamento percettivo. Le immagini e le performance non cercano di ricomporre un ordine definitivo, ma restituiscono un'esperienza aperta, instabile e stratificata.\n\nProgetto originale: Alessia Lalinga.\nContributo audiovisivo: riprese e montaggio di Lorenzo Filippini.",
+
+    videoId: "Exaljqc4zrI"
+  }
+
 ];
 
-/* CREA LE COPERTINE */
+
+/* ========================================
+   CREAZIONE AUTOMATICA COPERTINE
+======================================== */
 
 const container = document.getElementById("projects");
 
-projects.forEach((project,index) => {
+projects.forEach((project, index) => {
+
   const card = document.createElement("article");
-  card.className = "project";
+  card.className = "project reveal";
 
   const button = document.createElement("button");
   button.className = "project-button";
-  button.setAttribute("aria-label","Apri progetto: "+project.title);
+  button.type = "button";
+
+  button.setAttribute(
+    "aria-label",
+    "Apri progetto: " + project.title
+  );
 
   const imageBox = document.createElement("div");
   imageBox.className = "project-image";
 
   const image = document.createElement("img");
   image.src = project.image;
-  image.alt = project.title;
+  image.alt = "Copertina del progetto " + project.title;
   image.loading = "lazy";
+
   imageBox.appendChild(image);
+
+  const overlay = document.createElement("div");
+  overlay.className = "project-overlay";
+
+  const number = document.createElement("span");
+  number.className = "project-number";
+  number.textContent =
+    "Selected Work / " +
+    String(index + 1).padStart(2, "0");
+
+  const overlayTitle = document.createElement("h3");
+  overlayTitle.textContent = project.title;
+
+  const view = document.createElement("span");
+  view.className = "project-view";
+  view.textContent = "VIEW PROJECT ↗️";
+
+  overlay.append(number, overlayTitle, view);
+  imageBox.appendChild(overlay);
 
   const info = document.createElement("div");
   info.className = "project-info";
@@ -575,87 +1158,289 @@ projects.forEach((project,index) => {
   const role = document.createElement("span");
   role.textContent = project.role;
 
-  info.append(title,role);
-  button.append(imageBox,info);
-  button.addEventListener("click",()=>openProject(index));
+  info.append(title, role);
+
+  button.append(imageBox, info);
+
+  button.addEventListener("click", () => {
+    openProject(index);
+  });
 
   card.appendChild(button);
   container.appendChild(card);
+
 });
 
-/* APERTURA PROGETTI */
+
+/* ========================================
+   FINESTRE DETTAGLIO
+======================================== */
 
 const modal = document.getElementById("projectModal");
+const closeButton = document.getElementById("closeModal");
+const readMoreButton = document.getElementById("readMore");
+
 let previousFocus = null;
 
 function openProject(index) {
+
   const project = projects[index];
+
+  if (!project) return;
+
   previousFocus = document.activeElement;
 
-  document.getElementById("modalTitle").textContent = project.title;
-  document.getElementById("modalRole").textContent = project.role;
-  document.getElementById("modalDescription").textContent = project.description;
-  document.getElementById("modalLongDescription").textContent = project.extra;
+  document.getElementById("modalTitle").textContent =
+    project.title;
 
-  document.getElementById("modalExtra").hidden = true;
-  document.getElementById("readMore").textContent = "Leggi di più +";
+  document.getElementById("modalRole").textContent =
+    project.role;
+
+  document.getElementById("modalDescription").textContent =
+    project.description;
+
+  const longDescription =
+    document.getElementById("modalLongDescription");
+
+  longDescription.textContent = project.extra;
+  longDescription.style.whiteSpace = "pre-line";
+
+  const extra = document.getElementById("modalExtra");
+  extra.hidden = true;
+
+  readMoreButton.textContent = "Leggi di più +";
+  readMoreButton.hidden = !project.extra;
 
   const video = document.getElementById("modalVideo");
   video.replaceChildren();
 
-  if(project.videoId) {
+  if (project.videoId) {
+
     const iframe = document.createElement("iframe");
-    iframe.src = "https://www.youtube-nocookie.com/embed/" +
-      encodeURIComponent(project.videoId) + "?autoplay=1&rel=0";
+
+    iframe.src =
+      "https://www.youtube-nocookie.com/embed/" +
+      encodeURIComponent(project.videoId) +
+      "?autoplay=1&rel=0";
+
     iframe.title = project.title;
-    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
     iframe.allowFullscreen = true;
+
     video.appendChild(iframe);
-  } else {
-    const placeholder = document.createElement("div");
-    placeholder.className = "video-placeholder";
-    placeholder.textContent = "Qui apparirà il video del progetto.";
-    video.appendChild(placeholder);
+
   }
 
   modal.classList.add("open");
-  document.body.style.overflow = "hidden";
+  modal.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("modal-open");
+
   modal.scrollTop = 0;
-  modal.querySelector(".close").focus();
+  closeButton.focus();
+
 }
 
 function closeProject() {
+
+  if (!modal.classList.contains("open")) return;
+
   modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+
   document.getElementById("modalVideo").replaceChildren();
-  document.body.style.overflow = "";
-  if(previousFocus) previousFocus.focus();
+
+  document.body.classList.remove("modal-open");
+
+  if (previousFocus) {
+    previousFocus.focus();
+  }
+
 }
 
 function toggleMore() {
+
   const extra = document.getElementById("modalExtra");
+
   extra.hidden = !extra.hidden;
-  document.getElementById("readMore").textContent =
+
+  readMoreButton.textContent =
     extra.hidden ? "Leggi di più +" : "Mostra meno −";
+
 }
 
+closeButton.addEventListener("click", closeProject);
+
+readMoreButton.addEventListener("click", toggleMore);
+
 modal.addEventListener("click", event => {
-  if(event.target === modal) closeProject();
+
+  if (event.target === modal) {
+    closeProject();
+  }
+
 });
 
 document.addEventListener("keydown", event => {
-  if(event.key === "Escape" && modal.classList.contains("open")) {
+
+  if (!modal.classList.contains("open")) return;
+
+  if (event.key === "Escape") {
     closeProject();
+    return;
   }
+
+  if (event.key === "Tab") {
+
+    const focusable = Array.from(
+      modal.querySelectorAll(
+        'button:not([hidden]):not([disabled]), a[href]'
+      )
+    ).filter(element => element.getClientRects().length > 0);
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (
+      !event.shiftKey &&
+      document.activeElement === last
+    ) {
+      event.preventDefault();
+      first.focus();
+    }
+
+  }
+
 });
 
-document.getElementById("year").textContent = new Date().getFullYear();
 
-/* AVVIO VIDEO */
+/* ========================================
+   ANIMAZIONI SCROLL
+======================================== */
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window && !reducedMotion) {
+
+  const observer = new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+    {
+      threshold: 0.08,
+      rootMargin: "0px 0px 50px 0px"
+    }
+  );
+
+  revealElements.forEach(element => {
+    observer.observe(element);
+  });
+
+} else {
+
+  revealElements.forEach(element => {
+    element.classList.add("visible");
+  });
+
+}
+
+/* LINEA CHE REAGISCE ALLO SCROLL */
+
+const heroLine = document.querySelector(".hero-line");
+const hero = document.querySelector(".hero");
+
+let scrollScheduled = false;
+
+function updateHeroLine() {
+
+  const heroHeight = hero.offsetHeight || 1;
+
+  const progress = Math.min(
+    Math.max(window.scrollY / heroHeight, 0),
+    1
+  );
+
+  const shift = -120 + progress * 450;
+
+  heroLine.style.setProperty(
+    "--line-shift",
+    shift + "%"
+  );
+
+  scrollScheduled = false;
+
+}
+
+if (!reducedMotion) {
+
+  window.addEventListener("scroll", () => {
+
+    if (!scrollScheduled) {
+
+      scrollScheduled = true;
+      requestAnimationFrame(updateHeroLine);
+
+    }
+
+  }, { passive: true });
+
+  updateHeroLine();
+
+}
+
+
+/* ========================================
+   ANNO FOOTER
+======================================== */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* ========================================
+   AVVIO VIDEO INTRO
+======================================== */
+
 const heroVideo = document.querySelector(".hero-video");
-heroVideo.play().catch(() => {
-  // Alcuni browser possono bloccare l'avvio automatico.
-});
+
+if (heroVideo) {
+
+  const playPromise = heroVideo.play();
+
+  if (playPromise !== undefined) {
+
+    playPromise.catch(() => {
+      // Alcuni browser bloccano l'autoplay.
+    });
+
+  }
+
+}
 
 </script>
+
 </body>
 </html>
