@@ -180,7 +180,6 @@ nav {
   from {
     transform: scaleY(0);
   }
-
   to {
     transform: scaleY(1);
   }
@@ -399,6 +398,12 @@ h2 {
   transform: translateY(0);
 }
 
+.project:hover .project-view,
+.project-button:focus-visible .project-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .project-info {
   display: flex;
   justify-content: space-between;
@@ -436,33 +441,16 @@ h2 {
 }
 
 /* ========================================
-   BEHIND THE LENS — PANORAMIC EDITION
+   BEHIND THE LENS
+   FULL WIDTH PANORAMIC STRIP
 ======================================== */
 
 .about {
   position: relative;
   overflow: hidden;
-  isolation: isolate;
-  padding: 115px 0 130px;
+  padding: 110px 0 125px;
   border-top: 1px solid #333;
-  background: #141513;
-}
-
-/* GRANA FOTOGRAFICA */
-
-.about::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-  opacity: .075;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
-}
-
-.about .wrap {
-  position: relative;
-  z-index: 2;
+  background: #0b0b0b;
 }
 
 /* TITOLO */
@@ -471,37 +459,32 @@ h2 {
   margin-bottom: 42px;
 }
 
-.about-heading .section-label {
-  margin-bottom: 20px;
-  color: #a5a99d;
-}
-
 .about-heading h2 {
-  margin: 0;
-  font-size: clamp(55px, 9vw, 120px);
+  margin: 15px 0 0;
+  font-size: clamp(55px, 9vw, 115px);
   line-height: .95;
   font-weight: 800;
   letter-spacing: -.075em;
   text-transform: uppercase;
 }
 
-/* CORNICE PANORAMICA */
+/* STRISCIA PANORAMICA A TUTTO SCHERMO */
 
 .about-panorama {
   position: relative;
   width: 100%;
-  height: clamp(300px, 46vw, 570px);
+  height: 180px;
   overflow: hidden;
-  background: #292929;
+  background: #222;
   isolation: isolate;
 }
 
 .about-panorama img {
   position: absolute;
-  width: 100%;
-  height: calc(100% + 160px);
-  top: -80px;
+  top: -50px;
   left: 0;
+  width: 100%;
+  height: calc(100% + 100px);
   object-fit: cover;
   object-position: center 45%;
   display: block;
@@ -511,20 +494,6 @@ h2 {
     0
   );
   will-change: transform;
-  filter: saturate(.82) contrast(1.06);
-}
-
-.about-panorama::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,.12),
-    transparent 45%,
-    rgba(0,0,0,.3)
-  );
 }
 
 /* DIDASCALIA */
@@ -535,13 +504,13 @@ h2 {
   gap: 20px;
   padding: 17px 0;
   border-bottom: 1px solid rgba(255,255,255,.18);
-  color: #a7a7a2;
+  color: #aaa;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-/* BIOGRAFIA EDITORIALE */
+/* BIOGRAFIA */
 
 .about-content {
   display: grid;
@@ -817,7 +786,7 @@ footer {
   }
 
   .about-panorama {
-    height: 330px;
+    height: 130px;
   }
 
   .about-panorama img {
@@ -1012,14 +981,15 @@ footer {
 </section>
 
 <!-- ========================================
-     BEHIND THE LENS — PANORAMIC EDITION
+     BEHIND THE LENS
+     FULL WIDTH PANORAMIC STRIP
 ======================================== -->
 
 <section class="about" id="about">
 
-  <div class="wrap">
+  <!-- TITOLO -->
 
-    <!-- TITOLO -->
+  <div class="wrap">
 
     <div class="about-heading reveal">
 
@@ -1031,20 +1001,24 @@ footer {
 
     </div>
 
-    <!-- FOTO PANORAMICA -->
+  </div>
 
-    <div
-      class="about-panorama reveal"
-      id="aboutPanorama">
+  <!-- FOTO PANORAMICA A TUTTA LARGHEZZA -->
 
-      <img
-        src="lorenzo.jpg"
-        alt="Fotografia di Lorenzo Filippini"
-        id="aboutPhoto">
+  <div
+    class="about-panorama reveal"
+    id="aboutPanorama">
 
-    </div>
+    <img
+      src="lorenzo.jpg"
+      alt="Fotografia di Lorenzo Filippini"
+      id="aboutPhoto">
 
-    <!-- DIDASCALIA -->
+  </div>
+
+  <!-- BIOGRAFIA -->
+
+  <div class="wrap">
 
     <div class="about-caption">
 
@@ -1055,8 +1029,6 @@ footer {
       </span>
 
     </div>
-
-    <!-- BIOGRAFIA -->
 
     <div class="about-content">
 
@@ -1802,7 +1774,7 @@ if (
       );
 
       const shift =
-        80 - clamped * 160;
+        50 - clamped * 100;
 
       aboutPhoto.style.setProperty(
         "--photo-shift",
