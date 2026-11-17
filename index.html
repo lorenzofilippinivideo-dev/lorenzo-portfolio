@@ -17,9 +17,13 @@
   --muted: #aaa;
 }
 
-•⁠  ⁠{ box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -28,10 +32,19 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
-body.modal-open { overflow: hidden; }
+body.modal-open {
+  overflow: hidden;
+}
 
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
 
 button:focus-visible,
 a:focus-visible {
@@ -74,8 +87,13 @@ nav {
   font-size: 13px;
 }
 
-.links a { transition: opacity .3s ease; }
-.links a:hover { opacity: .55; }
+.links a {
+  transition: opacity .3s ease;
+}
+
+.links a:hover {
+  opacity: .55;
+}
 
 /* VIDEO INTRO */
 
@@ -159,8 +177,13 @@ nav {
 }
 
 @keyframes drawLine {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .hero-copy {
@@ -176,7 +199,9 @@ nav {
   text-align: left;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: Manrope, sans-serif;
 }
 
@@ -218,7 +243,9 @@ h1 {
 
 /* SEZIONI */
 
-section { padding: 105px 0; }
+section {
+  padding: 105px 0;
+}
 
 .section-top {
   display: flex;
@@ -256,7 +283,9 @@ h2 {
   gap: 38px 32px;
 }
 
-.project { min-width: 0; }
+.project {
+  min-width: 0;
+}
 
 .project-button {
   display: block;
@@ -359,7 +388,9 @@ h2 {
   color: rgba(255,255,255,.8);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity .4s ease, transform .4s ease;
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
 }
 
 .project:hover .project-view,
@@ -404,30 +435,143 @@ h2 {
   transform: translateY(0);
 }
 
-/* BEHIND THE LENS */
+/* ========================================
+   BEHIND THE LENS — PANORAMIC EDITION
+======================================== */
 
 .about {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 115px 0 130px;
   border-top: 1px solid #333;
+  background: #141513;
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+/* GRANA FOTOGRAFICA */
+
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: .075;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
 }
 
-.about-image {
+.about .wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* TITOLO */
+
+.about-heading {
+  margin-bottom: 42px;
+}
+
+.about-heading .section-label {
+  margin-bottom: 20px;
+  color: #a5a99d;
+}
+
+.about-heading h2 {
+  margin: 0;
+  font-size: clamp(55px, 9vw, 120px);
+  line-height: .95;
+  font-weight: 800;
+  letter-spacing: -.075em;
+  text-transform: uppercase;
+}
+
+/* CORNICE PANORAMICA */
+
+.about-panorama {
+  position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: clamp(300px, 46vw, 570px);
+  overflow: hidden;
+  background: #292929;
+  isolation: isolate;
+}
+
+.about-panorama img {
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 160px);
+  top: -80px;
+  left: 0;
   object-fit: cover;
-  background: #222;
+  object-position: center 45%;
+  display: block;
+  transform: translate3d(
+    0,
+    var(--photo-shift, 0px),
+    0
+  );
+  will-change: transform;
+  filter: saturate(.82) contrast(1.06);
+}
+
+.about-panorama::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.12),
+    transparent 45%,
+    rgba(0,0,0,.3)
+  );
+}
+
+/* DIDASCALIA */
+
+.about-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  color: #a7a7a2;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* BIOGRAFIA EDITORIALE */
+
+.about-content {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: clamp(40px, 7vw, 110px);
+  padding-top: 75px;
+}
+
+.about-intro {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(27px, 3.3vw, 43px);
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -.055em;
+  color: #f2f2ed;
+  margin: 0;
 }
 
 .about-text {
-  color: #bcbcbc;
-  line-height: 1.9;
+  color: #bcbdb7;
+  line-height: 1.95;
   font-size: 15px;
+}
+
+.about-text p {
+  margin: 0 0 26px;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
 }
 
 /* CONTATTI */
@@ -441,7 +585,9 @@ h2 {
   font-size: clamp(40px, 7vw, 85px);
 }
 
-.contact p { color: #aaa; }
+.contact p {
+  color: #aaa;
+}
 
 .contact-details {
   display: flex;
@@ -456,7 +602,9 @@ h2 {
   color: #f5f5f5;
   border-bottom: 1px solid rgba(255,255,255,.35);
   padding-bottom: 5px;
-  transition: color .3s ease, border-color .3s ease;
+  transition:
+    color .3s ease,
+    border-color .3s ease;
 }
 
 .contact-details a:hover {
@@ -506,7 +654,9 @@ footer {
   padding: 85px 20px 60px;
 }
 
-.modal.open { display: block; }
+.modal.open {
+  display: block;
+}
 
 .modal-inner {
   max-width: 1150px;
@@ -527,7 +677,9 @@ footer {
   z-index: 101;
 }
 
-.close:hover { background: #333; }
+.close:hover {
+  background: #333;
+}
 
 .modal-grid {
   display: grid;
@@ -554,7 +706,9 @@ footer {
   text-transform: uppercase;
 }
 
-.modal-extra[hidden] { display: none; }
+.modal-extra[hidden] {
+  display: none;
+}
 
 .more {
   background: none;
@@ -580,18 +734,36 @@ footer {
 /* SMARTPHONE */
 
 @media (max-width: 750px) {
-  header { padding: 22px 0; }
-  .links { gap: 15px; font-size: 12px; }
-  .hero { min-height: 550px; }
-  .hero-layout { gap: 17px; }
-  h1 { font-size: clamp(43px, 11vw, 80px); }
+
+  header {
+    padding: 22px 0;
+  }
+
+  .links {
+    gap: 15px;
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 550px;
+  }
+
+  .hero-layout {
+    gap: 17px;
+  }
+
+  h1 {
+    font-size: clamp(43px, 11vw, 80px);
+  }
 
   .eyebrow {
     font-size: 9px;
     letter-spacing: 2.5px;
   }
 
-  .roles { font-size: 12px; }
+  .roles {
+    font-size: 12px;
+  }
 
   .hero-shade {
     background: linear-gradient(
@@ -602,8 +774,13 @@ footer {
     );
   }
 
-  section { padding: 75px 0; }
-  .section-top { display: block; }
+  section {
+    padding: 75px 0;
+  }
+
+  .section-top {
+    display: block;
+  }
 
   .projects {
     grid-template-columns: 1fr;
@@ -616,39 +793,100 @@ footer {
     bottom: 20px;
   }
 
-  .project-overlay h3 { font-size: 28px; }
+  .project-overlay h3 {
+    font-size: 28px;
+  }
 
   .project-view {
     opacity: 1;
     transform: none;
   }
 
-  .about-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  /* BEHIND THE LENS MOBILE */
+
+  .about {
+    padding: 80px 0 95px;
   }
 
-  .modal { padding: 85px 20px 40px; }
+  .about-heading {
+    margin-bottom: 30px;
+  }
+
+  .about-heading h2 {
+    font-size: clamp(45px, 11vw, 75px);
+  }
+
+  .about-panorama {
+    height: 330px;
+  }
+
+  .about-panorama img {
+    object-position: center 45%;
+  }
+
+  .about-caption {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-top: 50px;
+  }
+
+  .about-intro {
+    font-size: 29px;
+  }
+
+  .about-text {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .modal {
+    padding: 85px 20px 40px;
+  }
 
   .modal-grid {
     grid-template-columns: 1fr;
     gap: 25px;
   }
 
-  .video-box { grid-row: 1; }
-  .modal-text { grid-row: 2; }
-  .footer-inner { flex-direction: column; }
+  .video-box {
+    grid-row: 1;
+  }
+
+  .modal-text {
+    grid-row: 2;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+  }
 }
 
+/* ACCESSIBILITÀ */
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+
+  html {
+    scroll-behavior: auto;
+  }
 
   .hero-line::before {
     animation: none;
     transform: scaleY(1);
   }
 
-  .hero-line::after { display: none; }
+  .hero-line::after {
+    display: none;
+  }
+
+  .about-panorama img {
+    transform: none !important;
+    will-change: auto;
+  }
 
   .project-image img,
   .project-image::after,
@@ -672,6 +910,7 @@ footer {
 <header>
   <nav class="wrap">
     <a href="#" class="logo">LF.</a>
+
     <div class="links">
       <a href="#work">Projects</a>
       <a href="#about">About</a>
@@ -694,7 +933,9 @@ footer {
     playsinline
     preload="auto"
     aria-hidden="true">
+
     <source src="intro.mp4" type="video/mp4">
+
   </video>
 
   <div class="hero-shade"></div>
@@ -702,19 +943,29 @@ footer {
   <div class="hero-content">
     <div class="wrap">
       <div class="hero-layout">
-        <div class="hero-line" aria-hidden="true"></div>
+
+        <div
+          class="hero-line"
+          aria-hidden="true">
+        </div>
+
         <div class="hero-copy">
+
           <div class="eyebrow">
             Independent Visual Portfolio
           </div>
 
-          <h1>LORENZO<br>FILIPPINI</h1>
+          <h1>
+            LORENZO<br>
+            FILIPPINI
+          </h1>
 
           <div class="roles">
             Filmmaker &nbsp;·&nbsp;
             Camera Operator &nbsp;·&nbsp;
             Photographer
           </div>
+
         </div>
       </div>
     </div>
@@ -734,11 +985,14 @@ footer {
 
 <section id="work">
   <div class="wrap">
+
     <div class="section-top">
+
       <div>
         <div class="section-label">
           01 / Selected Work
         </div>
+
         <h2>Selected Projects.</h2>
       </div>
 
@@ -746,85 +1000,149 @@ footer {
         Una selezione di progetti, immagini e storie
         raccontate attraverso la videocamera.
       </p>
+
     </div>
 
-    <div class="projects" id="projects"></div>
+    <div
+      class="projects"
+      id="projects">
+    </div>
+
   </div>
 </section>
 
-<!-- BEHIND THE LENS -->
+<!-- ========================================
+     BEHIND THE LENS — PANORAMIC EDITION
+======================================== -->
 
 <section class="about" id="about">
-  <div class="wrap about-layout">
 
-    <img
-      class="about-image"
-      src="lorenzo.JPG"
-      alt="Fotografia di Lorenzo Filippini">
+  <div class="wrap">
 
-    <div>
-      <div class="section-label">02 / About Me</div>
+    <!-- TITOLO -->
+
+    <div class="about-heading reveal">
+
+      <div class="section-label">
+        02 / About Me
+      </div>
+
       <h2>Behind the lens.</h2>
 
-      <div class="about-text">
+    </div>
+
+    <!-- FOTO PANORAMICA -->
+
+    <div
+      class="about-panorama reveal"
+      id="aboutPanorama">
+
+      <img
+        src="lorenzo.jpg"
+        alt="Fotografia di Lorenzo Filippini"
+        id="aboutPhoto">
+
+    </div>
+
+    <!-- DIDASCALIA -->
+
+    <div class="about-caption">
+
+      <span>Lorenzo Filippini</span>
+
+      <span>
+        Filmmaker / Camera Operator
+      </span>
+
+    </div>
+
+    <!-- BIOGRAFIA -->
+
+    <div class="about-content">
+
+      <div class="reveal">
+
+        <p class="about-intro">
+          Tutto è iniziato a sedici anni,
+          con una videocamera tra le mani
+          e la voglia di raccontare storie
+          attraverso le immagini.
+        </p>
+
+      </div>
+
+      <div class="about-text reveal">
 
         <p>
-          Tutto è iniziato a sedici anni, con una videocamera
-          tra le mani e la voglia di raccontare storie
-          attraverso le immagini. Da allora, quella curiosità
-          si è trasformata in un percorso fatto di incontri,
-          sperimentazione e diverse decine di progetti,
-          ognuno capace di lasciare qualcosa e di aprire
-          nuove prospettive.
+          Da allora, quella curiosità si è
+          trasformata in un percorso fatto
+          di incontri, sperimentazione e
+          diverse decine di progetti,
+          ognuno capace di lasciare qualcosa
+          e di aprire nuove prospettive.
         </p>
 
         <p>
-          La mia formazione parte dalla grafica e dalle
-          telecomunicazioni, per poi trovare una direzione
-          sempre più precisa nel mondo dell’audiovisivo,
-          attraverso una qualifica professionale come
-          Tecnico di Produzione Video presso l’Istituto
-          di Alto Perfezionamento Musicale di Saluzzo.
+          La mia formazione parte dalla grafica
+          e dalle telecomunicazioni, per poi
+          trovare una direzione sempre più
+          precisa nel mondo dell’audiovisivo,
+          attraverso una qualifica professionale
+          come Tecnico di Produzione Video
+          presso l’Istituto di Alto
+          Perfezionamento Musicale di Saluzzo.
         </p>
 
         <p>
-          Negli anni ho avuto l’opportunità di esplorare
-          il mondo della produzione da prospettive differenti:
-          dietro la macchina da presa come operatore di camera
-          in alcuni documentari, nel cuore dei set cinematografici
-          come videomaker di backstage, nella creazione di
-          contenuti digitali e nella dimensione imprevedibile
-          delle produzioni live, collaborando con Sky Italia,
-          Spectra ed altri service.
+          Negli anni ho avuto l’opportunità
+          di esplorare il mondo della produzione
+          da prospettive differenti: dietro
+          la macchina da presa come operatore
+          di camera in alcuni documentari,
+          nel cuore dei set cinematografici
+          come videomaker di backstage,
+          nella creazione di contenuti digitali
+          e nella dimensione imprevedibile
+          delle produzioni live, collaborando
+          con Sky Italia, Spectra ed altri service.
         </p>
 
         <p>
-          Ma raccontare attraverso le immagini, per me,
-          non significa soltanto girare un video. Significa
-          osservare, cercare dettagli, entrare in contatto
-          con realtà lontane dalla propria. È da questo
-          desiderio che è nato anche un progetto fotografico
-          dedicato alle strade di Mboro, un villaggio della
-          Costa nord del Senegal: un racconto per immagini
-          che ha attraversato i confini, diventando
-          un’esposizione presentata in Normandia e in Svizzera.
+          Ma raccontare attraverso le immagini,
+          per me, non significa soltanto girare
+          un video. Significa osservare,
+          cercare dettagli, entrare in contatto
+          con realtà lontane dalla propria.
+          È da questo desiderio che è nato
+          anche un progetto fotografico
+          dedicato alle strade di Mboro,
+          un villaggio della Costa nord
+          del Senegal: un racconto per immagini
+          che ha attraversato i confini,
+          diventando un’esposizione presentata
+          in Normandia e in Svizzera.
         </p>
 
         <p>
-          Dal cinema alla fotografia, dai documentari alle
-          produzioni commerciali, ogni esperienza è un’occasione
-          per esplorare nuovi linguaggi e nuovi modi
+          Dal cinema alla fotografia,
+          dai documentari alle produzioni
+          commerciali, ogni esperienza
+          è un’occasione per esplorare
+          nuovi linguaggi e nuovi modi
           di guardare il mondo.
         </p>
 
         <p>
-          Perché prima ancora di raccontare una storia,
-          bisogna imparare a vederla.
+          Perché prima ancora di raccontare
+          una storia, bisogna imparare a vederla.
         </p>
 
       </div>
+
     </div>
+
   </div>
+
 </section>
 
 <!-- CONTATTI -->
@@ -836,11 +1154,17 @@ footer {
       03 / Get in Touch
     </div>
 
-    <h2>Let's create<br>something.</h2>
+    <h2>
+      Let's create<br>
+      something.
+    </h2>
 
-    <p>Hai un progetto in mente? Parliamone.</p>
+    <p>
+      Hai un progetto in mente? Parliamone.
+    </p>
 
     <div class="contact-details">
+
       <a href="mailto:lorenzo.filippini.video@gmail.com">
         lorenzo.filippini.video@gmail.com
       </a>
@@ -848,12 +1172,15 @@ footer {
       <a href="tel:+393423261198">
         +39 342 326 1198
       </a>
+
     </div>
 
     <a
       class="contact-button"
       href="mailto:lorenzo.filippini.video@gmail.com">
+
       CONTACT ME ↗️
+
     </a>
 
   </div>
@@ -865,12 +1192,16 @@ footer {
 
 <footer>
   <div class="wrap footer-inner">
+
     <span>
-      ©️ <span id="year"></span> Lorenzo Filippini
+      ©️ <span id="year"></span>
+      Lorenzo Filippini
     </span>
+
     <span>
       Filmmaker · Camera Operator · Photographer
     </span>
+
   </div>
 </footer>
 
@@ -895,23 +1226,39 @@ footer {
     <div class="modal-grid">
 
       <div class="modal-text">
-        <div class="modal-role" id="modalRole"></div>
+
+        <div
+          class="modal-role"
+          id="modalRole">
+        </div>
+
         <h2 id="modalTitle"></h2>
+
         <p id="modalDescription"></p>
 
         <div
           class="modal-extra"
           id="modalExtra"
           hidden>
+
           <p id="modalLongDescription"></p>
+
         </div>
 
-        <button class="more" id="readMore">
+        <button
+          class="more"
+          id="readMore">
+
           Leggi di più +
+
         </button>
+
       </div>
 
-      <div class="video-box" id="modalVideo"></div>
+      <div
+        class="video-box"
+        id="modalVideo">
+      </div>
 
     </div>
   </div>
@@ -983,14 +1330,19 @@ const projects = [
 
 /* CREAZIONE COPERTINE */
 
-const container = document.getElementById("projects");
+const container =
+  document.getElementById("projects");
 
 projects.forEach((project, index) => {
 
-  const card = document.createElement("article");
+  const card =
+    document.createElement("article");
+
   card.className = "project reveal";
 
-  const button = document.createElement("button");
+  const button =
+    document.createElement("button");
+
   button.className = "project-button";
   button.type = "button";
 
@@ -999,47 +1351,76 @@ projects.forEach((project, index) => {
     "Apri progetto: " + project.title
   );
 
-  const imageBox = document.createElement("div");
+  const imageBox =
+    document.createElement("div");
+
   imageBox.className = "project-image";
 
-  const image = document.createElement("img");
+  const image =
+    document.createElement("img");
+
   image.src = project.image;
-  image.alt = "Copertina del progetto " + project.title;
+  image.alt =
+    "Copertina del progetto " + project.title;
+
   image.loading = "lazy";
 
   imageBox.appendChild(image);
 
-  const overlay = document.createElement("div");
+  const overlay =
+    document.createElement("div");
+
   overlay.className = "project-overlay";
 
-  const number = document.createElement("span");
+  const number =
+    document.createElement("span");
+
   number.className = "project-number";
 
   number.textContent =
     "Selected Work / " +
     String(index + 1).padStart(2, "0");
 
-  const overlayTitle = document.createElement("h3");
+  const overlayTitle =
+    document.createElement("h3");
+
   overlayTitle.textContent = project.title;
 
-  const view = document.createElement("span");
+  const view =
+    document.createElement("span");
+
   view.className = "project-view";
   view.textContent = "VIEW PROJECT ↗️";
 
-  overlay.append(number, overlayTitle, view);
+  overlay.append(
+    number,
+    overlayTitle,
+    view
+  );
+
   imageBox.appendChild(overlay);
 
-  const info = document.createElement("div");
+  const info =
+    document.createElement("div");
+
   info.className = "project-info";
 
-  const title = document.createElement("h3");
+  const title =
+    document.createElement("h3");
+
   title.textContent = project.title;
 
-  const role = document.createElement("span");
+  const role =
+    document.createElement("span");
+
   role.textContent = project.role;
 
   info.append(title, role);
-  button.append(imageBox, info);
+
+  button.append(
+    imageBox,
+    info
+  );
 
   button.addEventListener("click", () => {
     openProject(index);
@@ -1052,46 +1433,68 @@ projects.forEach((project, index) => {
 
 /* DETTAGLIO PROGETTO */
 
-const modal = document.getElementById("projectModal");
-const closeButton = document.getElementById("closeModal");
-const readMoreButton = document.getElementById("readMore");
+const modal =
+  document.getElementById("projectModal");
+
+const closeButton =
+  document.getElementById("closeModal");
+
+const readMoreButton =
+  document.getElementById("readMore");
 
 let previousFocus = null;
 
 function openProject(index) {
 
   const project = projects[index];
+
   if (!project) return;
 
   previousFocus = document.activeElement;
 
-  document.getElementById("modalTitle").textContent =
-    project.title;
+  document.getElementById(
+    "modalTitle"
+  ).textContent = project.title;
 
-  document.getElementById("modalRole").textContent =
-    project.role;
+  document.getElementById(
+    "modalRole"
+  ).textContent = project.role;
 
-  document.getElementById("modalDescription").textContent =
-    project.description;
+  document.getElementById(
+    "modalDescription"
+  ).textContent = project.description;
 
   const longDescription =
-    document.getElementById("modalLongDescription");
+    document.getElementById(
+      "modalLongDescription"
+    );
 
-  longDescription.textContent = project.extra;
-  longDescription.style.whiteSpace = "pre-line";
+  longDescription.textContent =
+    project.extra;
 
-  const extra = document.getElementById("modalExtra");
+  longDescription.style.whiteSpace =
+    "pre-line";
+
+  const extra =
+    document.getElementById("modalExtra");
+
   extra.hidden = true;
 
-  readMoreButton.textContent = "Leggi di più +";
-  readMoreButton.hidden = !project.extra;
+  readMoreButton.textContent =
+    "Leggi di più +";
 
-  const video = document.getElementById("modalVideo");
+  readMoreButton.hidden =
+    !project.extra;
+
+  const video =
+    document.getElementById("modalVideo");
+
   video.replaceChildren();
 
   if (project.videoId) {
 
-    const iframe = document.createElement("iframe");
+    const iframe =
+      document.createElement("iframe");
 
     iframe.src =
       "https://www.youtube-nocookie.com/embed/" +
@@ -1106,115 +1509,185 @@ function openProject(index) {
     iframe.allowFullscreen = true;
 
     video.appendChild(iframe);
+
   }
 
   modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "modal-open"
+  );
 
   modal.scrollTop = 0;
+
   closeButton.focus();
+
 }
 
 function closeProject() {
 
-  if (!modal.classList.contains("open")) return;
+  if (!modal.classList.contains("open")) {
+    return;
+  }
 
   modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
 
-  document.getElementById("modalVideo").replaceChildren();
-  document.body.classList.remove("modal-open");
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.getElementById(
+    "modalVideo"
+  ).replaceChildren();
+
+  document.body.classList.remove(
+    "modal-open"
+  );
 
   if (previousFocus) {
     previousFocus.focus();
   }
+
 }
 
 function toggleMore() {
 
-  const extra = document.getElementById("modalExtra");
+  const extra =
+    document.getElementById("modalExtra");
+
   extra.hidden = !extra.hidden;
 
   readMoreButton.textContent =
-    extra.hidden ? "Leggi di più +" : "Mostra meno −";
+    extra.hidden
+      ? "Leggi di più +"
+      : "Mostra meno −";
+
 }
 
-closeButton.addEventListener("click", closeProject);
-readMoreButton.addEventListener("click", toggleMore);
+closeButton.addEventListener(
+  "click",
+  closeProject
+);
 
-modal.addEventListener("click", event => {
-  if (event.target === modal) closeProject();
-});
+readMoreButton.addEventListener(
+  "click",
+  toggleMore
+);
 
-document.addEventListener("keydown", event => {
+modal.addEventListener(
+  "click",
+  event => {
 
-  if (!modal.classList.contains("open")) return;
-
-  if (event.key === "Escape") {
-    closeProject();
-    return;
-  }
-
-  if (event.key === "Tab") {
-
-    const focusable = Array.from(
-      modal.querySelectorAll(
-        'button:not([hidden]):not([disabled]), a[href]'
-      )
-    ).filter(
-      element => element.getClientRects().length > 0
-    );
-
-    if (!focusable.length) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (
-      event.shiftKey &&
-      document.activeElement === first
-    ) {
-      event.preventDefault();
-      last.focus();
-    } else if (
-      !event.shiftKey &&
-      document.activeElement === last
-    ) {
-      event.preventDefault();
-      first.focus();
+    if (event.target === modal) {
+      closeProject();
     }
+
   }
-});
+);
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (!modal.classList.contains("open")) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeProject();
+      return;
+    }
+
+    if (event.key === "Tab") {
+
+      const focusable = Array.from(
+        modal.querySelectorAll(
+          'button:not([hidden]):not([disabled]), a[href]'
+        )
+      ).filter(
+        element =>
+          element.getClientRects().length > 0
+      );
+
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last =
+        focusable[focusable.length - 1];
+
+      if (
+        event.shiftKey &&
+        document.activeElement === first
+      ) {
+
+        event.preventDefault();
+        last.focus();
+
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === last
+      ) {
+
+        event.preventDefault();
+        first.focus();
+
+      }
+
+    }
+
+  }
+);
 
 /* ANIMAZIONI SCROLL */
 
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
+const reducedMotion =
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-const revealElements = document.querySelectorAll(".reveal");
+const revealElements =
+  document.querySelectorAll(".reveal");
 
-if ("IntersectionObserver" in window && !reducedMotion) {
+if (
+  "IntersectionObserver" in window &&
+  !reducedMotion
+) {
 
-  const observer = new IntersectionObserver(
-    entries => {
+  const observer =
+    new IntersectionObserver(
 
-      entries.forEach(entry => {
+      entries => {
 
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+        entries.forEach(entry => {
 
-      });
+          if (entry.isIntersecting) {
 
-    },
-    {
-      threshold: 0.08,
-      rootMargin: "0px 0px 50px 0px"
-    }
-  );
+            entry.target.classList.add(
+              "visible"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px 50px 0px"
+      }
+
+    );
 
   revealElements.forEach(element => {
     observer.observe(element);
@@ -1230,21 +1703,29 @@ if ("IntersectionObserver" in window && !reducedMotion) {
 
 /* LINEA ANIMATA DURANTE LO SCROLL */
 
-const heroLine = document.querySelector(".hero-line");
-const hero = document.querySelector(".hero");
+const heroLine =
+  document.querySelector(".hero-line");
+
+const hero =
+  document.querySelector(".hero");
 
 let scrollScheduled = false;
 
 function updateHeroLine() {
 
-  const heroHeight = hero.offsetHeight || 1;
+  const heroHeight =
+    hero.offsetHeight || 1;
 
   const progress = Math.min(
-    Math.max(window.scrollY / heroHeight, 0),
+    Math.max(
+      window.scrollY / heroHeight,
+      0
+    ),
     1
   );
 
-  const shift = -120 + progress * 450;
+  const shift =
+    -120 + progress * 450;
 
   heroLine.style.setProperty(
     "--line-shift",
@@ -1252,39 +1733,140 @@ function updateHeroLine() {
   );
 
   scrollScheduled = false;
+
 }
 
 if (!reducedMotion) {
 
-  window.addEventListener("scroll", () => {
+  window.addEventListener(
+    "scroll",
+    () => {
 
-    if (!scrollScheduled) {
-      scrollScheduled = true;
-      requestAnimationFrame(updateHeroLine);
-    }
+      if (!scrollScheduled) {
 
-  }, { passive: true });
+        scrollScheduled = true;
+
+        requestAnimationFrame(
+          updateHeroLine
+        );
+
+      }
+
+    },
+    { passive: true }
+  );
 
   updateHeroLine();
+
+}
+
+/* ========================================
+   PARALLASSE FOTO BEHIND THE LENS
+======================================== */
+
+const aboutPanorama =
+  document.getElementById("aboutPanorama");
+
+const aboutPhoto =
+  document.getElementById("aboutPhoto");
+
+if (
+  aboutPanorama &&
+  aboutPhoto &&
+  !reducedMotion
+) {
+
+  let parallaxScheduled = false;
+
+  function updateAboutParallax() {
+
+    const rect =
+      aboutPanorama.getBoundingClientRect();
+
+    const viewportHeight =
+      window.innerHeight;
+
+    const visible =
+      rect.bottom > 0 &&
+      rect.top < viewportHeight;
+
+    if (visible) {
+
+      const progress =
+        (viewportHeight - rect.top) /
+        (viewportHeight + rect.height);
+
+      const clamped = Math.max(
+        0,
+        Math.min(1, progress)
+      );
+
+      const shift =
+        80 - clamped * 160;
+
+      aboutPhoto.style.setProperty(
+        "--photo-shift",
+        shift + "px"
+      );
+
+    }
+
+    parallaxScheduled = false;
+
+  }
+
+  function scheduleAboutParallax() {
+
+    if (!parallaxScheduled) {
+
+      parallaxScheduled = true;
+
+      requestAnimationFrame(
+        updateAboutParallax
+      );
+
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    scheduleAboutParallax,
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    scheduleAboutParallax
+  );
+
+  updateAboutParallax();
+
 }
 
 /* ANNO FOOTER */
 
-document.getElementById("year").textContent =
+document.getElementById(
+  "year"
+).textContent =
   new Date().getFullYear();
 
 /* VIDEO INTRO */
 
-const heroVideo = document.querySelector(".hero-video");
+const heroVideo =
+  document.querySelector(".hero-video");
 
 if (heroVideo) {
 
-  const playPromise = heroVideo.play();
+  const playPromise =
+    heroVideo.play();
 
   if (playPromise !== undefined) {
+
     playPromise.catch(() => {
-      // Autoplay eventualmente bloccato dal browser.
+      // Autoplay eventualmente bloccato.
     });
+
   }
 
 }
@@ -1292,3 +1874,5 @@ if (heroVideo) {
 </script>
 </body>
 </html>
+
+
